@@ -1,8 +1,8 @@
-# COVID-19 Data Exploration with SQL
+# COVID-19 SQL Data Analysis Project
 
 ## Introduction
 
-This project explores COVID-19 deaths, cases, population impact, and vaccination progress using SQL. The analysis focuses on comparing case counts, death counts, population percentages, continent-level totals, and vaccination rollout patterns.
+This SQL project analyzes COVID-19 cases, deaths, population impact, and vaccination progress using PostgreSQL. It explores country-level and continent-level trends, including death rates, case percentages, cumulative vaccinations, and vaccination progress by continent.
 
 The dataset files included in this repository are:
 
