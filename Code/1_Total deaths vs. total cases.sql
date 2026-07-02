@@ -1,15 +1,3 @@
-/*
-Find the latest available COVID totals for each country.
-
-This query groups rows by location and returns:
-- the latest date available for each country
-- the highest recorded total_cases value
-- the highest recorded total_deaths value
-
-Because total_cases and total_deaths are cumulative fields, MAX() usually represents
-the final total for each country. The filter continent IS NOT NULL removes summary
-rows such as World, and continent groups.
-*/
 SELECT 
     location,
     MAX(date) AS latest_date,
@@ -24,5 +12,5 @@ WHERE
 GROUP BY
     location
 ORDER BY
-    location ASC;
+    max_total_deaths DESC;
     

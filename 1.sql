@@ -111,7 +111,7 @@ WITH total_death AS
             covid_deaths
         WHERE 
             covid_deaths.total_deaths IS NOT NULL
-            AND continent = 'North America'
+            AND continent IS NOT NULL
         GROUP BY 
             covid_deaths.continent,
             location
@@ -122,19 +122,9 @@ WITH total_death AS
 
 SELECT
     continent,
-    SUM(MAX(total_deaths)) AS total_deaths
-FROM covid_deaths
-WHERE continent IS NOT NULL
+    SUM(Total_Death_Count) AS total_deaths
+FROM total_death
 GROUP BY continent
-ORDER BY total_deaths DESC;
-
-SELECT
-    location,
-    MAX(total_deaths) AS total_deaths
-FROM covid_deaths
-WHERE continent IS NULL
-  AND location IN ('Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America')
-GROUP BY location
 ORDER BY total_deaths DESC;
 
 
@@ -165,17 +155,6 @@ SELECT
 FROM 
     continent_total_deaths;
 
-SELECT
-    continent,
-    location,
-    new_cases
-FROM covid_deaths
-WHERE 
-    continent IS NOT NULL
-    AND new_cases IS NULL
-ORDER BY 
-    continent ASC,
-    location DESC;
 
 
 SELECT 

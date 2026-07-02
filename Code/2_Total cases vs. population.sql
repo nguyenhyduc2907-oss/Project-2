@@ -1,13 +1,3 @@
-/*
-Compare total COVID cases against population by country.
-
-This query is used to calculate what percentage of each country's population
-has been recorded as confirmed COVID cases.
-
-The filter continent IS NOT NULL should be used to remove summary rows such as
-World, and continent groups.
-*/
-
 SELECT 
     location,
     MAX(total_cases) AS max_total_cases,
@@ -21,4 +11,4 @@ WHERE
 GROUP BY
     location
 ORDER BY
-    location ASC;
+    max_total_cases DESC;

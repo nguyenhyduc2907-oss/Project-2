@@ -1,5 +1,5 @@
 /.vscode
-/CovidDeaths.csv
 /CovidDeaths.xlsx
-/CovidVaccinations.csv
 /CovidVaccinations.xlsx
+*.sql
+Code/
