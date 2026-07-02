@@ -1,0 +1,28 @@
+WITH vac_over_population AS 
+(
+        SELECT 
+            covid_deaths.continent,
+            covid_deaths.location,
+            covid_deaths.date,
+            covid_deaths.population,
+            covid_vaccinations.new_vaccinations,
+            SUM (covid_vaccinations.new_vaccinations) OVER (PARTITION BY covid_deaths.location ORDER BY covid_deaths.location, covid_deaths.date) AS cumulative_vaccinations
+        FROM covid_deaths
+        JOIN covid_vaccinations on
+            covid_deaths.location = covid_vaccinations.location
+            AND covid_deaths.date = covid_vaccinations.date
+        WHERE 
+            covid_deaths.continent IS NOT NULL
+        ORDER BY 1, 2, 3
+)
+
+SELECT
+    continent,
+    location,
+    ROUND (MAX (cumulative_vaccinations/population)*100, 4) AS max_vaccination_percentage
+FROM vac_over_population
+WHERE 
+    population IS NOT NULL
+    AND cumulative_vaccinations IS NOT NULL
+GROUP BY continent, location
+ORDER BY continent, location;

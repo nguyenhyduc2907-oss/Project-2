@@ -1,0 +1,25 @@
+WITH continent_total_deaths AS (
+        SELECT 
+            continent,
+            location,
+            MAX(total_deaths) AS total_deaths,
+            MAX(population) AS total_population
+        FROM 
+            covid_deaths
+        WHERE 
+            continent IS NOT NULL
+            AND total_deaths IS NOT NULL
+        GROUP BY 
+            continent,
+            location
+        ORDER BY 
+            continent ASC,
+            total_deaths DESC
+)
+
+SELECT 
+    SUM(total_deaths) AS total_death_of_continent,
+    SUM(total_population) AS total_population_of_continent,
+    ROUND((SUM(total_deaths) / SUM(total_population)) * 100, 4) AS death_percentage_of_continent
+FROM 
+    continent_total_deaths;
